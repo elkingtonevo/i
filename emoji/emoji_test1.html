@@ -1,0 +1,143 @@
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<script src = "index_emoji.js"></script>
+<script src = "emoji_test1.js"></script>
+
+<script type="text/javascript">
+
+// This is the check script
+
+function checkit()
+{
+   // In textstring I gather the data that are finally written to the textarea.
+
+   var textstring = '';
+
+   // First of all, have all the text boxes been filled in?
+   // This part is treated in the normal page.
+   // I put all boxes and their values in textstring
+
+   for (i=0;i<4;i++) {
+      var box = document.forms['example'].elements[i];
+      if (!box.value) {
+         alert('You haven\'t filled in ' + box.name + '!');
+         box.focus()
+         return;
+      }
+      textstring += box.name + ': ' + box.value + '\n';
+   }
+
+   // Get value of the 'Why' radio buttons.
+
+   user_input = '';
+   for (i=0;i<document.forms['example'].why.length;i++) {
+      if (document.forms['example'].why[i].checked) {
+         user_input = document.forms['example'].why[i].value;
+      }
+   }
+   textstring += 'Why: ' + user_input + '\n';
+
+   // Get value of the 'How' select box.
+
+   user_input = document.example.refer.options[document.example.refer.selectedIndex].value
+   textstring += 'How: ' + user_input + '\n';
+
+   // See what checkboxes are checked. They are elements 9-12
+
+   textstring += 'More info: ';
+   for (i=9;i<13;i++) {
+      if (document.example.elements[i].checked) {
+         textstring += document.example.elements[i].name + ' ';
+      }
+   }
+
+   // Write textstring to the textarea.
+
+   document.forms['example'].output.value = textstring;
+}
+
+</script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<style>
+  body { background: #393D48; }
+ 
+td {
+    color: #d7ceb2;
+    font: 20px 'Cambria';
+    text-align: center;
+    text-shadow: 0px 0px 0px #393D48, 0px px 0px #5c5f72;
+}
+</style>
+
+<title>
+	emoji encryption
+</title>
+
+</head>
+
+<body>
+
+<!--
+<script>
+
+var baseEmoji = require('./index_emoji')
+
+// encode numbers as emojis
+var buf = new Buffer('1234567812345678', 'hex')
+var emoji = baseEmoji.toUtf8(buf)
+var etext = baseEmoji.toNames(buf)
+console.log(emoji);
+console.log(etext);
+
+</script>
+-->
+
+<table cellpadding="0" cellspacing="0">
+   <tr>
+      <td><p>EmojiCrypto</p></td>
+</table>
+
+<form name="input" action="#" onsubmit="emoji_test1.js">
+<table class="form">
+<tr>
+<td>Value</td>
+<td><input name="value" /></td>
+</tr>
+</table>
+</form>
+
+<form name="output" action="#" onsubmit="emoji_test1.js">
+<table class="form">
+<tr>
+<td>Emoji:</td>
+<td><output name="emoji" /></td>
+</tr>
+
+<tr>
+<td>EmojiText:</td>
+<td><output name="emojitext" /></td>
+</tr>
+
+<tr><td colspan="2"><input type="submit" value="Submit form" /><br />
+<input type="reset" /></td></tr>
+</table>
+</form>
+
+</body>
+
+</html>
